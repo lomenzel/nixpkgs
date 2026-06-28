@@ -502,7 +502,7 @@ buildStdenv.mkDerivation {
     (enableFeature pulseaudioSupport "pulseaudio")
     (enableFeature sndioSupport "sndio")
   ]
-  ++ lib.optionals (!buildStdenv.hostPlatform.isDarwin && lib.versionAtLeast version "141") [
+  ++ lib.optionals (!buildStdenv.hostPlatform.isDarwin && lib.versionAtLeast version "141" && !stdenv.hostPlatform.is32bit) [
     "--with-onnx-runtime=${lib.getLib onnxruntime}/lib"
   ]
   ++ [
